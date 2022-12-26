@@ -31,32 +31,6 @@ public:
         this->down = NULL;
     }
 };
-Node *inputTillNegativeOne()
-{
-    int data;
-    cin >> data;
-    Node *head = NULL;
-    Node *tail = NULL;
-
-    while (data != -1)
-    {
-        Node *newNode = new Node(data);
-        if (!head)
-        {
-            head = newNode;
-            tail = newNode;
-        }
-
-        else
-        {
-            tail->next = newNode;
-            tail = newNode;
-        }
-        cin >> data;
-    }
-    return head;
-}
-
 Node *mergeWithoutExtraSpace(Node *head1, Node *head2)
 {
     Node *tail = NULL;
@@ -166,12 +140,12 @@ int main()
 
     DoubleNode *head = NULL;
     DoubleNode *righttail = NULL;
-    // cout << "Enter the size of the double linked list" << endl;
+    cout << "Enter the size of the double linked list" << endl;
     int n;
     cin >> n;
     for (int i = 0; i < n; i++)
     {
-        // cout << "Enter the data of the double node" << endl;
+        cout << "Enter the data of the double node" << endl;
         int data;
         cin >> data;
         DoubleNode *newDoubleNode = new DoubleNode(data);
@@ -185,13 +159,13 @@ int main()
             righttail->next = newDoubleNode;
             righttail = newDoubleNode;
         }
-        // cout << "Enter the size of the singly linked list" << endl;
+        cout << "Enter the size of the singly linked list" << endl;
         int k;
         cin >> k;
         Node *tail = NULL;
         for (int j = 0; j < k; j++)
         {
-            // cout << "Enter the data of the singly node" << endl;
+            cout << "Enter the data of the singly node" << endl;
 
             int data;
             cin >> data;
@@ -211,7 +185,7 @@ int main()
     // flatten linked list
 
     // print the linked list
-    /*   DoubleNode *temp = head;
+      DoubleNode *temp = head;
       Node *head1 = NULL;
       head1 = temp->down;
       while (temp && temp->next)
@@ -236,10 +210,10 @@ int main()
       {
           cout << head1->data << " ";
           head1 = head1->next;
-      } */
+      }
 
     // merge sort
-    DoubleNode *temp = head;
+    /* DoubleNode *temp = head;
     Node *head1 = NULL;
     // newnode having double node data
     Node *singlehead = new Node(temp->data);
@@ -261,7 +235,7 @@ int main()
     print(singlehead);
     cout << endl;
     head1 = mergesort(singlehead);
-    print(singlehead);
+    print(singlehead); */
 
     // head1 = temp->down;
 
