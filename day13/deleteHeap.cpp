@@ -2,9 +2,9 @@
 #include "../BinaryTreeNode.cpp"
 using namespace std;
 
-// insert in max heap
+// delete in max heap
 
-BinaryTreeNode<int> *insertHeap(BinaryTreeNode<int> *root, int data)
+BinaryTreeNode<int> *deleteHeap(BinaryTreeNode<int> *root)
 {
     // get level order in vector
     vector<BinaryTreeNode<int> *> v;
@@ -28,29 +28,39 @@ BinaryTreeNode<int> *insertHeap(BinaryTreeNode<int> *root, int data)
     {
         cout << v[i]->data << " ";
     }
-    cout<<endl;
+    cout << endl;
+// return 0;
+    // swap last node with root
+    swap(v[0], v[v.size() - 1]);
 
-    // insert new node at last
-    BinaryTreeNode<int> *newNode = new BinaryTreeNode<int>(data);
-    v.push_back(newNode);
+    // delete last node
 
-    // swap with parent if parent is smaller
-    int childIndex = v.size() - 1;
-    while (childIndex > 0)
+    // delete v[v.size() - 1];
+    v.pop_back();
+
+    // swap with larger child if parent is smaller
+    int parentIndex = 0;
+    while (parentIndex < v.size())
     {
-        int parentIndex = (childIndex - 1) / 2;
-        if (v[childIndex]->data > v[parentIndex]->data)
+        int leftChildIndex = 2 * parentIndex + 1;
+        int rightChildIndex = 2 * parentIndex + 2;
+        int maxIndex = parentIndex;
+        if (leftChildIndex < v.size() && v[leftChildIndex]->data > v[maxIndex]->data)
         {
-            swap(v[childIndex], v[parentIndex]);
+            maxIndex = leftChildIndex;
         }
-        else
+        if (rightChildIndex < v.size() && v[rightChildIndex]->data > v[maxIndex]->data)
+        {
+            maxIndex = rightChildIndex;
+        }
+        if (maxIndex == parentIndex)
         {
             break;
         }
-        childIndex = parentIndex;
+        swap(v[maxIndex], v[parentIndex]);
+        parentIndex = maxIndex;
     }
-    v[v.size() - 1]->left = NULL;
-    v[v.size() - 1]->right = NULL;
+
     // make tree from vector
     for (int i = 0; i < v.size(); i++)
     {
@@ -72,11 +82,11 @@ int main()
 {
     BinaryTreeNode<int> *root = taktInputLevelorder();
 
-    cout << "Before Insertion" << endl;
+    cout << "Before deletion" << endl;
     printLevelorder(root);
 
-    root = insertHeap(root, 100);
-    cout << "After Insertion" << endl;
+    root = deleteHeap(root);
+    cout << "After deletion" << endl;
 
     printLevelorder(root);
     return 0;
